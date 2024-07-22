@@ -69,7 +69,7 @@ The pipeline performs the following tasks:
 - Docker Hub Login: Authenticates with Docker Hub using credentials stored in GitHub Secrets.
 - Dependency Installation and Testing: Installs dependencies and runs tests for each microservice.
 - Docker Image Build and Push: Builds Docker images for each microservice and pushes them to Docker Hub.
-#### Github Actions:
+#### Github Actions (3):
 ##### 1- build-push-images-hub
 ```
 name: CI
@@ -208,7 +208,7 @@ jobs:
 - Terraform: Manages GCP resources, such as creating a GKE cluster and provisioning necessary infrastructure.
 - Helm Charts: Define Kubernetes resources for each microservice.
 
-#### Github Actions:
+#### Github Actions (5):
 ##### deploy-upgrade-helm-charts-dev
 ```
 ```
