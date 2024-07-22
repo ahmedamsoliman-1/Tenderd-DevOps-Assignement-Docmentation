@@ -208,6 +208,69 @@ jobs:
 - Terraform: Manages GCP resources, such as creating a GKE cluster and provisioning necessary infrastructure.
 - Helm Charts: Define Kubernetes resources for each microservice.
 
+#### Github Actions:
+##### deploy-upgrade-helm-charts-dev
+```
+```
+##### deploy-gke-k8-cluster-dev
+```
+```
+##### close-stale-issues
+```
+name: 'Close stale issues and PRs'
+
+on:
+  schedule:
+    - cron: '30 1 * * *'
+
+jobs:
+  close-stale-issues:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/stale@v9
+        with:
+          stale-issue-message: 'This issue is stale because it has been open 30 days with no activity. Remove stale label or comment or this will be closed in 5 days.'
+          days-before-stale: 30
+          days-before-close: 5
+```
+##### apply-branch-protection
+```
+name: Apply Branch Rules
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  apply-branch-protection:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Apply branch protection rules
+      run: |
+        echo "Applying relaxed branch protection rules to ${{ github.repository }}"
+
+        curl -X PUT \
+          -H "Authorization: token ${{ secrets.TENDERD_TOKEN }}" \
+          -H "Accept: application/vnd.github.v3+json" \
+          -d '{
+            "required_status_checks": null,
+            "enforce_admins": false,
+            "required_pull_request_reviews": null,
+            "restrictions": null,
+            "required_linear_history": false,
+            "allow_force_pushes": false,
+            "allow_deletions": false
+          }' \
+          https://api.github.com/repos/${{ github.repository }}/branches/main/protection
+      env:
+        MY_GITHUB_PAT: ${{ secrets.TENDERD_TOKEN }}
+```
+##### destroy-dev
+```
+```
+
 ## Monitoring
 Monitoring and logging are integrated using Prometheus and Grafana for metrics, and ELK stack (Elasticsearch, Logstash, and Kibana) for logs.
 
