@@ -290,7 +290,9 @@ jobs:
 * Created GKE
 ![GKE](images/gke.png)
 * Github Actions
-![GKE](images/github.png)
+![GKE](images/cicd.png)
+![GKE](images/branch.png)
+![GKE](images/pr.png)
 ## Monitoring
 Monitoring and logging are integrated using Prometheus and Grafana for metrics, and ELK stack (Elasticsearch, Logstash, and Kibana) for logs.
 
