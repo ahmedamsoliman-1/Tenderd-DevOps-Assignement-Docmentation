@@ -207,6 +207,32 @@ jobs:
 - The deployment process uses Helm charts and Terraform to manage Kubernetes resources and GCP infrastructure.
 - Terraform: Manages GCP resources, such as creating a GKE cluster and provisioning necessary infrastructure.
 - Helm Charts: Define Kubernetes resources for each microservice.
+```
+Frontend-svc-chart example:
+# Chart.yaml
+apiVersion: v2
+name: frontend-svc
+description: A Helm chart for Kubernetes
+version: 0.1.0
+appVersion: 1.16.0
+
+```
+```
+terraform statment to deploy resrouce example: 
+provider "google" {
+  project = var.project
+  region  = var.region
+}
+
+resource "google_container_cluster" "primary" {
+  name     = "primary-cluster"
+  location = var.region
+
+  node_config {
+    machine_type = "e2-medium"
+  }
+}
+```
 
 #### Github Actions (5):
 ##### deploy-upgrade-helm-charts-dev
