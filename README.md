@@ -211,9 +211,141 @@ jobs:
 #### Github Actions (5):
 ##### deploy-upgrade-helm-charts-dev
 ```
+name: tenderd-deploy-dev
+run-name: ${{ github.actor }} has triggered the pipeline for to build tendered GKE kubernetes cluster and deploy/upgrade helm charts services. 
+
+on:
+  push:
+    branches:
+      - 'dev'
+
+defaults:
+  run:
+    shell: bash
+    working-directory: ./terraform/dev-gke
+  
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  deploy-upgrade-helm-charts-dev:
+    runs-on: ubuntu-latest
+    needs: deploy-gke-k8-cluster-dev
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Configure GCP credentials (reuse existing step)
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}
+          create_credentials_file: true
+          service_account: ${{ secrets.SA }}
+          token_format: "access_token"
+          access_token_lifetime: "120s"
+
+      - name: Install gcloud SDK
+        uses: google-github-actions/setup-gcloud@v1
+        with:
+          version: 'latest'
+
+      - name: Install gke-gcloud-auth-plugin
+        run: |
+          gcloud components install gke-gcloud-auth-plugin
+
+      - name: Get GKE Cluster Credentials
+        run: |
+          gcloud container clusters get-credentials ${{ secrets.DEV_CLUSTER_NAME }} --zone us-east1-b --project ${{ secrets.GCP_PROJECT }}
+
+      - name: Install Helm (if not already present)
+        run: |
+          # Check if Helm is installed
+          if ! helm version >/dev/null 2>&1; then
+            curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
+            bash get_helm.sh
+          fi
+          helm version
+
+      - name: Deploy Helm Charts - Frontend SVC
+        run: |
+          cd ../../helm-charts/frontend-svc-chart
+          helm upgrade --install frontend-release . --namespace tendered --create-namespace -f values.yaml
+
+      - name: Deploy Helm Charts - User SVC
+        run: |
+          cd ../../helm-charts/user-svc-chart
+          helm upgrade --install user-release . --namespace tendered --create-namespace -f values.yaml
+
+      - name: Deploy Helm Charts - Order SVC
+        run: |
+          cd ../../helm-charts/order-svc-chart
+          helm upgrade --install order-release . --namespace tendered --create-namespace -f values.yaml
+      
+      - name: Deploy Extra services - Monitoring - Ingress
+        run: |
+          cd ../../helm-charts/extra/grafana
+          chmod +x deploy.sh
+          ./deploy.sh
+
+          cd ../prometheus
+          chmod +x deploy.sh
+          ./deploy.sh
+
+          cd ../ingress-nginx
+          chmod +x deploy.sh
+          ./deploy.sh
 ```
 ##### deploy-gke-k8-cluster-dev
 ```
+deploy-gke-k8-cluster-dev:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write 
+      contents: read         
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Configure GCP credentials
+        id: auth
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}
+          create_credentials_file: true
+          service_account: ${{ secrets.SA }}
+          token_format: "access_token"
+          access_token_lifetime: "120s"
+      - name: Echo environment variables
+        run: printenv
+      - name: Setup Terraform with specified version on the runner
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.7.0
+          terraform_wrapper: true
+             
+      - name: Terraform init
+        id: init
+        run: terraform init
+      
+      - name: Terraform Format
+        id: fmt
+        run: terraform fmt -recursive -write=true 
+
+      - name: Terraform validate
+        id: validate
+        run: terraform validate
+
+      - name: Terraform plan
+        id: plan
+        run: terraform plan 
+        continue-on-error: true
+
+      - name: Terraform Plan Status
+        if: steps.plan.outcome == 'failure'
+        run: exit 1
+
+      - name: Terraform Apply
+        run: terraform apply -auto-approve
 ```
 ##### close-stale-issues
 ```
@@ -269,6 +401,55 @@ jobs:
 ```
 ##### destroy-dev
 ```
+name: tenderd-destroy-dev
+run-name: ${{ github.actor }} has triggered the pipeline for Terraform
+
+on:
+  push:
+    branches:
+    - 'dev'
+
+defaults:
+  run:
+    shell: bash
+    working-directory: ./terraform/dev-gke
+permissions:
+  contents: read
+
+jobs:
+  destroy-dev:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+    - name: "Checkout"
+      uses: actions/checkout@v3
+    - name: Configure GCP credentials
+      id: auth
+      uses: google-github-actions/auth@v2
+      with:
+        workload_identity_provider: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}
+        create_credentials_file: true
+        service_account: ${{ secrets.SA }}
+        token_format: "access_token"
+        access_token_lifetime: "120s"
+    - name: Echo stuff
+      run: printenv
+    - name: Setup Terraform with specified version on the runner
+      uses: hashicorp/setup-terraform@v2
+      with:
+        terraform_version: 1.7.0
+        terraform_wrapper: true
+
+    - name: Terraform init
+      id: init
+      run: terraform init
+
+    - name: Terraform Destroy
+      run: terraform destroy -auto-approve
+
+
 ```
 
 ## Monitoring
