@@ -342,9 +342,8 @@ Also GCP bucket is used to host terrafom lock file, for Github Actions to keep t
 - Automated Testing: Implement additional testing stages in the CI/CD pipeline.
 
 ## Check the current services running
-- Tenderd  Frontend - URL : 
-- Tenderd user services - URL : 
-- Tenderd order services - URL : 
-- Grafana Dashboards for running apps and k8 ifra
-- Promethues Dashboards
+- Tenderd  Frontend - URL [Go](http://tendered.ahmedalimsoliman.com/)
+- Grafana Dashboards for running apps and k8 ifra [Go](http://grafana.ahmedalimsoliman.com/)
+- Promethues Dashboards [Go](http://prom.ahmedalimsoliman.com/)
 
+![Repo One](images/tend.png)
