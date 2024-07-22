@@ -338,8 +338,7 @@ Also GCP bucket is used to host terrafom lock file, for Github Actions to keep t
 
 ## Future Enhacments
 - Enhancing Logging: Integrate ELK stack for comprehensive log management.
-- Security Scanning: Add security scanning tools for Docker images.
-- Automated Testing: Implement additional testing stages in the CI/CD pipeline.
+- Security Scanning: Add security scanning tools for Docker images, and use cert manager to use https protocol. 
 
 ## Check the current services running
 - Tenderd  Frontend - URL [Go](http://tendered.ahmedalimsoliman.com/)
