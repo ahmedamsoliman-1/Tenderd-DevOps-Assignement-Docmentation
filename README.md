@@ -1,5 +1,5 @@
-#  Tenderd - DevOps Assignment
-# Tenderd-DevOps-Assignement-Docmentation
+# Tenderd - DevOps Assignment
+# Docmentation
 ## Overview
 This services is a microservices-based application designed to manage and streamline various services through a unified platform. The primary objective of this project is to implement a robust CI/CD pipeline, deploy the microservices to a Kubernetes cluster, and integrate monitoring and logging solutions to ensure the application's performance and reliability.
 
