@@ -14,8 +14,6 @@ Contains the source code for the microservices.
 * Structure:
 ```
 Tenderd-DevOps-Assignement-1
-├── README.md
-├── docker-compose.yaml
 ├── frontend-svc
 │   ├── Dockerfile
 │   ├── node_modules
@@ -33,7 +31,8 @@ Tenderd-DevOps-Assignement-1
 │   ├── package.json
 │   ├── package-lock.json
 │   ├── src
-├── update_git.sh
+├── docker-compose.yaml
+├── README.md
 ```
 
 ### Infrastructure Repository:
@@ -42,18 +41,17 @@ Contains the infrastructure as code (IaC) for deploying the microservices to Kub
 * Structure:
 ```
 Tenderd-DevOps-Assignement-Infra-1
-├── README.md
 ├── helm-charts
 │   ├── frontend-svc-chart
 │   ├── templates
 │   ├── values.yaml
-├── k8-status.sh
 ├── terraform
 │   ├── dev
 │   │   ├── main.tf
 │   │   ├── outputs.tf
 │   │   ├── variables.tf
-├── update_git.sh
+├── k8-status.sh
+├── README.md
 
 ```
 
@@ -477,12 +475,48 @@ jobs:
 
 
 ```
-
+#### Images
+* Created GKE
+![GKE](images/gke.png)
+* Github Actions
+![GKE](images/github.png)
 ## Monitoring
 Monitoring and logging are integrated using Prometheus and Grafana for metrics, and ELK stack (Elasticsearch, Logstash, and Kibana) for logs.
 
 ## Logging
 Logging is not supported yet (possibility to capture and visualize using ELK stack (Elasticsearch, Logstash, and Kibana))
+
+## Docker Compose for Development
+The docker-compose.yaml file in micro services repository is used for local development and testing. It simplifies the process of running and managing the microservices locally by defining the necessary services, networks.
+- Configuration:
+```
+version: '3'
+services:
+  frontend-svc:
+    build:
+      context: ./frontend-svc
+    ports:
+      - "3000:3000"
+    depends_on:
+      - order-svc
+      - user-svc
+
+  order-svc:
+    build:
+      context: ./order-svc
+    ports:
+      - "3001:3001"
+
+  user-svc:
+    build:
+      context: ./user-svc
+    ports:
+      - "3002:3002"
+
+networks:
+  default:
+    driver: bridge
+```
 
 ## Google Cloud Platform 
 This services deployed in Google Cloud Platform (GCP) using Google Kubernetes Engine (GKE). This feature is integrated into the CI/CD pipeline to ensure secure and efficient deployment.
