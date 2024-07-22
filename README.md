@@ -293,6 +293,9 @@ jobs:
 ![GKE](images/cicd.png)
 ![GKE](images/branch.png)
 ![GKE](images/pr.png)
+![GKE](images/step-push.png)
+![GKE](images/step-gke.png)
+![GKE](images/step-helm.png)
 ## Monitoring
 Monitoring and logging are integrated using Prometheus and Grafana for metrics, and ELK stack (Elasticsearch, Logstash, and Kibana) for logs.
 
