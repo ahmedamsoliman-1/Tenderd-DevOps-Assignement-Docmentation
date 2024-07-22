@@ -517,6 +517,7 @@ networks:
   default:
     driver: bridge
 ```
+![Repo One](images/docker.png)
 
 ## Google Cloud Platform 
 This services deployed in Google Cloud Platform (GCP) using Google Kubernetes Engine (GKE). This feature is integrated into the CI/CD pipeline to ensure secure and efficient deployment.
