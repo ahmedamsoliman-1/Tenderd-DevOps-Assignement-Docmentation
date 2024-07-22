@@ -1,4 +1,4 @@
-#  - Tenderd - DevOps Assignment
+#  Tenderd - DevOps Assignment
 # Tenderd-DevOps-Assignement-Docmentation
 ## Overview
 This services is a microservices-based application designed to manage and streamline various services through a unified platform. The primary objective of this project is to implement a robust CI/CD pipeline, deploy the microservices to a Kubernetes cluster, and integrate monitoring and logging solutions to ensure the application's performance and reliability.
@@ -332,9 +332,20 @@ networks:
 ```
 ![Repo One](images/docker.png)
 
+- see REAEME.md for more details. 
+
 ## Google Cloud Platform 
 This services deployed in Google Cloud Platform (GCP) using Google Kubernetes Engine (GKE). This feature is integrated into the CI/CD pipeline to ensure secure and efficient deployment.
 Also GCP bucket is used to host terrafom lock file, for Github Actions to keep track the status of deployed resources and to be used later to destroy resources (with GitHub Actions as well) 
+### services used: 
+```
+- Google Kubernetes Engine
+- Google Services and load balancing and ingress
+- IAM and Admin
+- Google VPC
+- Google DNS
+- Google Storage
+```
 
 ## Future Enhacments
 - Enhancing Logging: Integrate ELK stack for comprehensive log management.
