@@ -1,7 +1,7 @@
-# ServiceHub - Tenderd - DevOps Assignment
+#  - Tenderd - DevOps Assignment
 # Tenderd-DevOps-Assignement-Docmentation
 ## Overview
-ServiceHub is a microservices-based application designed to manage and streamline various services through a unified platform. The primary objective of this project is to implement a robust CI/CD pipeline, deploy the microservices to a Kubernetes cluster, and integrate monitoring and logging solutions to ensure the application's performance and reliability.
+This services is a microservices-based application designed to manage and streamline various services through a unified platform. The primary objective of this project is to implement a robust CI/CD pipeline, deploy the microservices to a Kubernetes cluster, and integrate monitoring and logging solutions to ensure the application's performance and reliability.
 
 This documentation outlines the project structure, CI/CD pipeline, deployment process, and the integration of GCP services for additional functionality.
 
@@ -529,7 +529,7 @@ Also GCP bucket is used to host terrafom lock file, for Github Actions to keep t
 - Automated Testing: Implement additional testing stages in the CI/CD pipeline.
 
 ## Check the current services running
-- Tenderd ServiceHub Frontend - URL : 
+- Tenderd  Frontend - URL : 
 - Tenderd user services - URL : 
 - Tenderd order services - URL : 
 - Grafana Dashboards for running apps and k8 ifra
