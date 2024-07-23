@@ -367,7 +367,52 @@ Also GCP bucket is used to host terrafom lock file, for Github Actions to keep t
 
 ## Future Enhacments
 - Enhancing Logging: Integrate ELK stack for comprehensive log management.
-- Security Scanning: Add security scanning tools for Docker images, and use cert manager to use https protocol. 
+
+## Security
+### HTTPS Setup with Cert-Manager
+To secure our services with HTTPS, Cert-Manager helm chart has been deployed in the Kubernetes cluster using Helm. Cert-Manager automates the management and issuance of TLS certificates from various certificate authorities (CAs), such as Let's Encrypt.
+```
+Name:         monitoring-cert
+Namespace:    default
+Labels:       <none>
+Annotations:  <none>
+API Version:  cert-manager.io/v1
+Kind:         Certificate
+Metadata:
+  Creation Timestamp:  2024-07-23T11:12:03Z
+  Generation:          1
+  Resource Version:    104267
+  UID:                 73774dba-9360-4839-b52d-d941ac87b437
+Spec:
+  Common Name:  tendered.ahmedalimsoliman.com
+  Dns Names:
+    tendered.ahmedalimsoliman.com
+  Issuer Ref:
+    Kind:       ClusterIssuer
+    Name:       letsencrypt-prod
+  Secret Name:  monitoring-cert-tls
+Status:
+  Conditions:
+    Last Transition Time:  2024-07-23T11:12:28Z
+    Message:               Certificate is up to date and has not expired
+    Observed Generation:   1
+    Reason:                Ready
+    Status:                True
+    Type:                  Ready
+  Not After:               2024-10-21T10:12:26Z
+  Not Before:              2024-07-23T10:12:27Z
+  Renewal Time:            2024-09-21T10:12:26Z
+  Revision:                1
+Events:
+  Type    Reason     Age   From                                       Message
+  ----    ------     ----  ----                                       -------
+  Normal  Issuing    37m   cert-manager-certificates-trigger          Issuing certificate as Secret does not exist
+  Normal  Generated  37m   cert-manager-certificates-key-manager      Stored new private key in temporary Secret resource "monitoring-cert-f8xmh"
+  Normal  Requested  37m   cert-manager-certificates-request-manager  Created new CertificateRequest resource "monitoring-cert-1"
+  Normal  Issuing    37m   cert-manager-certificates-issuing          The certificate has been successfully issued
+```
+![Repo One](images/cert.png)
+With Cert-Manager, TLS certificates are automatically managed and renewed, ensuring secure HTTPS access to our services with minimal manual intervention.
 
 ## Check the current services running
 - Tenderd  Frontend - URL [Go](http://tendered.ahmedalimsoliman.com/)
