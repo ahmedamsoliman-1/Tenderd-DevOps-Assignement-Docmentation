@@ -365,6 +365,76 @@ Also GCP bucket is used to host terrafom lock file, for Github Actions to keep t
 - Google Storage
 ```
 
+## Helm Charts
+All services deployed in our Google Kubernetes Engine (GKE) cluster are managed through Helm charts. Helm simplifies the process of deploying, managing, and scaling applications within Kubernetes by packaging all the necessary Kubernetes manifests into a single, reusable chart.
+### Overview
+
+Below is a summary of the Helm charts currently deployed in our Kubernetes cluster. These charts manage various services, including monitoring tools, frontend applications, and essential infrastructure components.
+
+### Chart Details
+
+| **Name**                        | **Namespace**   | **Revision** | **Last Updated**                | **Status**  | **Chart**                      | **App Version** |
+|---------------------------------|-----------------|--------------|--------------------------------|-------------|--------------------------------|-----------------|
+| **cert-manager-release**        | cert-manager    | 2            | 2024-07-23 15:04:00 +0400       | Deployed    | cert-manager-v1.15.1            | v1.15.1         |
+| **ingress-nginx**               | ingress-nginx   | 1            | 2024-07-23 12:15:24 +0400       | Deployed    | ingress-nginx-4.11.1            | 1.11.1          |
+| **monitoring-grafana-release**  | monitoring      | 6            | 2024-07-23 15:35:36 +0400       | Deployed    | grafana-8.3.6                   | 11.1.0          |
+| **monitoring-prometheus-release** | monitoring      | 2            | 2024-07-23 15:40:52 +0400       | Deployed    | prometheus-25.24.1              | v2.53.1         |
+| **tenderd-devops-frontend-release** | default         | 9            | 2024-07-23 12:01:40 UTC         | Deployed    | frontend-svc-chart-0.1.0        | 1.16.0          |
+| **tenderd-order-frontend-release** | default         | 4            | 2024-07-23 12:01:42 UTC         | Deployed    | order-svc-chart-0.1.0           | 1.16.0          |
+| **tenderd-user-frontend-release**  | default         | 4            | 2024-07-23 12:01:41 UTC         | Deployed    | user-svc-chart-0.1.0            | 1.16.0          |
+
+### Description of Deployed Charts
+
+#### **cert-manager**
+- **Namespace:** `cert-manager`
+- **Purpose:** Automates the management and issuance of TLS certificates.
+- **Chart Version:** `v1.15.1`
+- **Status:** Deployed
+
+#### **ingress-nginx**
+- **Namespace:** `ingress-nginx`
+- **Purpose:** Provides an ingress controller for routing external traffic to services within the cluster.
+- **Chart Version:** `ingress-nginx-4.11.1`
+- **Status:** Deployed
+
+#### **monitoring-grafana-release**
+- **Namespace:** `monitoring`
+- **Purpose:** Provides a powerful monitoring and visualization tool for metrics.
+- **Chart Version:** `grafana-8.3.6`
+- **Status:** Deployed
+
+#### **monitoring-prometheus-release**
+- **Namespace:** `monitoring`
+- **Purpose:** Prometheus is used for event monitoring and alerting.
+- **Chart Version:** `prometheus-25.24.1`
+- **Status:** Deployed
+
+#### **tenderd-devops-frontend-release**
+- **Namespace:** `default`
+- **Purpose:** Deploys the frontend service for the DevOps application.
+- **Chart Version:** `frontend-svc-chart-0.1.0`
+- **Status:** Deployed
+
+#### **tenderd-order-frontend-release**
+- **Namespace:** `default`
+- **Purpose:** Deploys the order service.
+- **Chart Version:** `order-svc-chart-0.1.0`
+- **Status:** Deployed
+
+#### **tenderd-user-frontend-release**
+- **Namespace:** `default`
+- **Purpose:** Deploys the user service.
+- **Chart Version:** `user-svc-chart-0.1.0`
+- **Status:** Deployed
+
+### Note:
+Helm charts deployment manged by Github Actions CI/CD: 
+```
+- tenderd-devops-frontend-release
+- tenderd-order-frontend-release
+- tenderd-user-frontend-release
+```
+
 ## Future Enhacments
 - Enhancing Logging: Integrate ELK stack for comprehensive log management.
 
