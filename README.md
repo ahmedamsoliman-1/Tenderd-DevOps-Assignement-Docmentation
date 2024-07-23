@@ -10,10 +10,10 @@ The project is divided into two repositories:
 
 ### Microservices Repository: 
 Contains the source code for the microservices.
-* Repository: [Tenderd-DevOps-Assignement-1](https://github.com/ahmedamsoliman-1/Tenderd-DevOps-Assignement-1)
+* Repository: [Tenderd-DevOps-Assignement-3](https://github.com/ahmedamsoliman-1/Tenderd-DevOps-Assignement-3)
 * Structure:
 ```
-Tenderd-DevOps-Assignement-1
+Tenderd-DevOps-Assignement-3
 ├── frontend-svc
 │   ├── Dockerfile
 │   ├── node_modules
@@ -37,10 +37,10 @@ Tenderd-DevOps-Assignement-1
 
 ### Infrastructure Repository:
 Contains the infrastructure as code (IaC) for deploying the microservices to Kubernetes.
-* Repository: [Tenderd-DevOps-Assignement-Infra-1](https://github.com/ahmedamsoliman-1/Tenderd-DevOps-Assignement-Infra-1)
+* Repository: [Tenderd-DevOps-Assignement-Infra-3](https://github.com/ahmedamsoliman-1/Tenderd-DevOps-Assignement-Infra-3)
 * Structure:
 ```
-Tenderd-DevOps-Assignement-Infra-1
+Tenderd-DevOps-Assignement-Infra-3
 ├── helm-charts
 │   ├── frontend-svc-chart
 │   ├── templates
@@ -59,7 +59,7 @@ Tenderd-DevOps-Assignement-Infra-1
 ## CI/CD Pipeline
 The CI/CD pipeline is implemented using GitHub Actions, GCP, Terraform and Docker. 
 The pipeline performs the following tasks:
-### Tenderd-DevOps-Assignement-1: 
+### Tenderd-DevOps-Assignement-3: 
 ![Repo One](repo-1.png)
 #### Deployment Process:
 - Code Checkout: Retrieves the latest code from the repository.
@@ -287,7 +287,7 @@ jobs:
 ```
 
 #### Images
-* Created GKE
+* Created GKE by Github Actions + Terraform on Google Cloud
 ![GKE](images/gke.png)
 * Github Actions
 ![GKE](images/cicd.png)
@@ -333,7 +333,7 @@ networks:
   default:
     driver: bridge
 ```
-![Repo One](images/docker.png)
+![Repo One](images/doc.png)
 
 - see REAEME.md for more details. 
 
