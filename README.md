@@ -288,13 +288,28 @@ jobs:
 
 #### Images
 * Created GKE by Github Actions + Terraform on Google Cloud
-![GKE](images/gke.png)
-* Github Actions
+![GKE](images/gcp/gke.png)
+- resources: 
+<p>
+  <img src="images/gcp/gcp_res_1.png" alt="Repo One" style="display:inline; width:30%;"/>
+  <img src="images/gcp/gcp_res_2.png" alt="Repo One" style="display:inline; width:30%;"/>
+  <img src="images/gcp/gcp_res_3.png" alt="Repo One" style="display:inline; width:30%;"/>
+</p>
+
+##### Github Actions
+- Previosion gke cluster
+- Deploy deployments using terraform in gke
 ![GKE](images/cicd.png)
+- Apply branch protection
 ![GKE](images/branch.png)
+- Run check on PR before merge
 ![GKE](images/pr.png)
+- github action to build and push images to Docker hub
 ![GKE](images/step-push.png)
-![GKE](images/step-gke.png)
+![GKE](images/gcp/dockerhub.png)
+- gke clustre creation steps: 
+![GKE](images/step-gke-2.png)
+- deploy helm charts into gke
 ![GKE](images/step-helm.png)
 ## Monitoring
 Monitoring and logging are integrated using Prometheus and Grafana for metrics, and ELK stack (Elasticsearch, Logstash, and Kibana) for logs.
