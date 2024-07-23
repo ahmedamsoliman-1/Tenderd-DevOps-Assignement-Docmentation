@@ -60,7 +60,7 @@ Tenderd-DevOps-Assignement-Infra-3
 The CI/CD pipeline is implemented using GitHub Actions, GCP, Terraform and Docker. 
 The pipeline performs the following tasks:
 ### Tenderd-DevOps-Assignement-3: 
-![Repo One](repo-1.png)
+![Repo One](images/repo-1.png)
 #### Deployment Process:
 - Code Checkout: Retrieves the latest code from the repository.
 - Docker Buildx Setup: Configures Docker Buildx for multi-platform builds.
@@ -132,7 +132,7 @@ jobs:
 ```
 
 ### Tenderd-DevOps-Assignement-Infra-1: 
-![Repo One](repo-2.png)
+![Repo One](images/repo-2.png)
 #### Deployment Process:
 - The deployment process uses Helm charts and Terraform to manage Kubernetes resources and GCP infrastructure.
 - Terraform: Manages GCP resources, such as creating a GKE cluster and provisioning necessary infrastructure.
